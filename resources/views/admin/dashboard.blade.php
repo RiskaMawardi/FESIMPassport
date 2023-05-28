@@ -1,0 +1,1 @@
+<h1>halo admin {{Auth::user()->nama}}</h1>
