@@ -74,6 +74,7 @@ class AuthController extends Controller
     }
 
     public function dashAdmin(){
-        return view('admin.dashboard');
+        $auth = Auth::user();
+        return view('admin.dashboard', compact('auth'));
     }
 }
