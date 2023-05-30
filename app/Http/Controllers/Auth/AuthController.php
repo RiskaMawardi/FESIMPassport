@@ -56,7 +56,7 @@ class AuthController extends Controller
             return redirect('/dashboard-admin')->with('success','welcome back!');
         }
         
-        return redirect('/dashboard-user')->with('success','welcome back!');
+        return redirect('/table-pengajuan')->with('success','welcome back!');
       
     }
 

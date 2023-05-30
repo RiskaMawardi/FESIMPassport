@@ -47,8 +47,12 @@ class BaseApi{
     {
         return $this->client()->get($endpoint);
     }
-
+   
     public function uploadPermohonan(String $endpoint, Array $data =[]){
+        return $this->client()->post($endpoint,$data);
+    }
+
+    public function uploadDokumen(String $endpoint, Array $data =[]){
         return $this->client()->post($endpoint,$data);
     }
 

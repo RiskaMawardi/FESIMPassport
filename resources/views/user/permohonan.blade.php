@@ -38,6 +38,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                          <input type="hidden" value="1" name="no_kk">
                             <label for="exampleInputEmail1">Jk</label>
                             <select class="form-control" name="jk" id="exampleSelectGender">
                                 <option value="1">Laki-laki</option>
@@ -46,7 +47,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Pekerjaan</label>
-                            <input type="text" class="form-control" name="pekerjaan" id="exampleInputEmail1"
+                            <input type="text" class="form-control" name="jenis_pekerjaan" id="exampleInputEmail1"
                                 placeholder="Pekerjaan">
                         </div>
                         <div class="form-group">

@@ -14,9 +14,9 @@ use App\Http\Controllers\PermohonanController;
 |
 */
 
-// Route::get('/p', function () {
-//     return view('user.permohonan');
-// });
+Route::get('/', function () {
+    return view('landing-page');
+});
 
 Route::get('/register-user',[AuthController::class,'register']);
 Route::post('/register-user',[AuthController::class,'storeRegister'])->name('registerAccount');
@@ -25,11 +25,12 @@ Route::post('/login',[AuthController::class,'loginStore'])->name('loginStore');
 Route::get('/logout',[AuthController::class,'logout']);
 
 
-Route::get('/dashboard-user',[AuthController::class,'dashUser']);
+//Route::get('/dashboard-user',[AuthController::class,'dashUser']);
 Route::get('/dashboard-admin',[AuthController::class,'dashAdmin']);
 
 
 Route::get('/pengajuan',[PermohonanController::class,'index']);
 Route::get('/upload',[PermohonanController::class,'uploadDokumen']);
+Route::post('/upload-doc',[PermohonanController::class,'upload'])->name('uploadDoc');
 Route::post('/pengajuan',[PermohonanController::class,'storePermohonan'])->name('uploadPermohonan');
 Route::get('/table-pengajuan',[PermohonanController::class,'tablePermohonan']);
