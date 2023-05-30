@@ -51,12 +51,21 @@ class PermohonanController extends Controller
             'ktp' => $request->ktp,
             'akta' => $request->akta,
             'dokumen_tambahan' => $request->dokumen_tambahan,
+            'jenis_passpor' => $request->jenis_passpor,
+            'kepentingan' => $request->kepentingan,
+            'negara_tujuan' => $request->negara_tujuan,
+            'keberangkatan' => $request->keberangkatan,
+            'kepulangan' => $request->kepulangan,
         ];
 
+        // dd($payload);
+
         $baseApi = new BaseApi;
-        $response = $baseApi->uploadDokumen('/api/upload-doc',$payload);
+        $response = (new BaseApi)->uploadDokumen('/api/upload-doc',$payload);
+        dd($response);
         if($response->failed()){
             $errors = $response->json('data');
+            // dd($errors);
             return redirect()->back()->with(['errors' => $errors]);
         }
 

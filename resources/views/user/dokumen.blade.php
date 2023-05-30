@@ -3,12 +3,17 @@
 
 <div class="col-12 grid-margin stretch-card">
     <div class="card">
+    @if (Session::get('errors'))
+    <div class="alert alert-danger">
+        {{Session::get('errors')}}
+    </div>
+@endif
         <div class="card-body">
             <h4 class="card-title">Upload Dokumen</h4>
             <p class="card-description">
                 Pastikan Dokumen yang disiapkan sesuai yang diminta
             </p>
-            <form class="forms-sample" action="{{route('uploadDoc')}}" method="POST">
+            <form class="forms-sample" action="{{route('uploadDoc')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -27,7 +32,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail3">Ijazah/Akta perkawinan/Buku Nikah/Surat
                                 Baptis (Optional)</label>
-                            <input type="file" class="form-control"  name="dokumenTambahan" id="exampleInputEmail3" placeholder="Email">
+                            <input type="file" class="form-control"  name="dokumen_tambahan" id="exampleInputEmail3" placeholder="Email">
                         </div>
                     </div>
                 </div>
