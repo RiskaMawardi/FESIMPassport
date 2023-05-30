@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PermohonanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing-page');
-});
+// Route::get('/p', function () {
+//     return view('user.permohonan');
+// });
 
 Route::get('/register-user',[AuthController::class,'register']);
 Route::post('/register-user',[AuthController::class,'storeRegister'])->name('registerAccount');
@@ -28,3 +28,8 @@ Route::get('/logout',[AuthController::class,'logout']);
 Route::get('/dashboard-user',[AuthController::class,'dashUser']);
 Route::get('/dashboard-admin',[AuthController::class,'dashAdmin']);
 
+
+Route::get('/pengajuan',[PermohonanController::class,'index']);
+Route::get('/upload',[PermohonanController::class,'uploadDokumen']);
+Route::post('/pengajuan',[PermohonanController::class,'storePermohonan'])->name('uploadPermohonan');
+Route::get('/table-pengajuan',[PermohonanController::class,'tablePermohonan']);

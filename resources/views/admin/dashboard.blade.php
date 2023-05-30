@@ -1,1 +1,1 @@
-<h1>halo admin {{$auth->name}}</h1>
+<h1>halo admin</h1>

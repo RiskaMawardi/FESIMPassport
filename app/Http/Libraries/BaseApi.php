@@ -15,6 +15,7 @@ class BaseApi{
     private function client()
     {
         return Http::baseUrl($this->baseUrl);
+        
     }
 
     public function index(String $endpoint, Array $data =[])
@@ -37,7 +38,7 @@ class BaseApi{
         return $this->client()->get($endpoint,$data);
     }
 
-    public function login(String $endpoint, Array $data =[])
+    public function login(String $endpoint,Array $data =[])
     {
         return $this->client()->post($endpoint,$data);
     }
@@ -47,5 +48,8 @@ class BaseApi{
         return $this->client()->get($endpoint);
     }
 
+    public function uploadPermohonan(String $endpoint, Array $data =[]){
+        return $this->client()->post($endpoint,$data);
+    }
 
 }
