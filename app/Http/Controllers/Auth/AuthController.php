@@ -20,7 +20,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password,
             'no_hp' => $request->no_hp,
-            'role' => $request->role
+            'role' => $request->role,
+            'no_kk' => $request->no_kk
         ];
 
         $baseApi = new BaseApi;
@@ -28,6 +29,7 @@ class AuthController extends Controller
         
         if($response->failed()){
             $errors = $response->json('data');
+            // dd($errors);
             return redirect()->back()->with(['errors' => $errors]);
         }
 
@@ -39,24 +41,53 @@ class AuthController extends Controller
     }
 
     public function loginStore(Request $request){
-        $payload = [
-            'email' => $request->email,
-            'password' => $request->password
-        ];
-        $baseApi = new BaseApi;
-        $response = $baseApi->login('/api/login' , $payload);
-        dd($response);
-        if($response->failed()){
-            $errors = $response->json('data');
+
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        try{
+            $email = $request->email;
+            $password = $request->password;
+    
+            $baseApi = new BaseApi;
+            //$response = $baseApi->login('/api/login');
+            // [
+            //     'headers' =>[
+            //         'Authorization' => 'Bearer'.session()->get('token.access_token'),
+            //         'Accept' => 'Application/json'
+            //     ],
+            //     'query' => [
+            //         'email' => $email,
+            //         'password' => $password
+            //     ]
+            // ]
+            $response = $baseApi->login('/api/login', $request->all());
+            // $result = json_decode((string)$response->getBody(),true);
+            // dd($result);
+            if($response->failed()){
+                $errors = $response->json('data');
+                dd($response);
+                return redirect()->back()->with(['errors' => $errors]);
+            }
+
+            $data = $response->json('data');
+            
+            return redirect()->route('dash-user')->with(['user' => $data['user']]);
+        }catch(Exception $error){
             return redirect()->back()->with(['errors' => $errors]);
         }
-
-        $user = $response->json('data');
-        if($user['data']['role'] == true){
-            return redirect('/dashboard-admin')->with('success','welcome back!');
-        }
+     
         
-        return redirect('/table-pengajuan')->with('success','welcome back!');
+        
+        // if($response->failed()){
+        //     $errors = $response->json('data');
+        //     return redirect()->back()->with(['errors' => $errors]);
+        // }
+
+       
+        
       
     }
 

@@ -1,4 +1,4 @@
-@extends('user.dashboard')
+@extends('admin.dashboard')
 @section('content')
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
@@ -28,21 +28,6 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
-        <div class="card bg-facebook d-flex align-items-center">
-            <div class="card-body ">
-                <div
-                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
-                    <i class="mdi mdi-account-plus text-white icon-lg"></i>
-                    <div class="ms-3">
-                        <a class="text-white font-weight-bold text-decoration-none" href="/pengajuan">Ajukan
-                            Permohonan</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-</div>
 @endsection
+

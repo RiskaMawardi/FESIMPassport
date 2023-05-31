@@ -99,8 +99,15 @@
                                             <label class="form-label" for="form3Example2">No Hp</label>
                                         </div>
                                     </div>
+                                    
                                 </div>
 
+                             
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="form3Example2" name="no_kk" class="form-control" />
+                                            <label class="form-label" for="form3Example2">No kk</label>
+                                        </div>
+                                    
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
                                     <input type="email" id="form3Example3" name="email" class="form-control" />

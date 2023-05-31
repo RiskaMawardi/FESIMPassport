@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Libraries\BaseApi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PermohonanController extends Controller
 {
@@ -20,17 +21,35 @@ class PermohonanController extends Controller
     }
 
     public function storePermohonan(Request $request){
+       
+        $pathkk = Storage::put("public/" . $request->nik . "/kk", $request->file('kk'));
+        $pathktp = Storage::put("public/" . $request->nik . "/ktp", $request->file('ktp'));
+        $pathakta = Storage::put("public/" . $request->nik . "/akta", $request->file('akta'));
+        $pathdoc = Storage::put("public/" . $request->nik . "/dokumen_tambahan", $request->file('dokumen_tambahan'));
+
         $payload =[
             'nik' => $request->nik,
             'nama' => $request->nama,
-            'alamat' => $request->alamat,
-            'tgl_lahir' => $request->tgl_lahir,
             'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
             'jk' => $request->jk,
+            'alamat' => $request->alamat,
+            'status_sipil' => $request->status_sipil,
             'jenis_pekerjaan' => $request->jenis_pekerjaan,
             'kewarganegaraan' => $request->kewarganegaraan,
-            'status_sipil' => $request->status_sipil,
-            'no_kk' => $request->no_kk
+            'kk' => $request->file('kk')->getClientOriginalName(),
+            'pathkk' => $pathkk,
+            'ktp' => $request->file('ktp')->getClientOriginalName(),
+            'pathktp' => $pathktp,
+            'akta' => $request->file('akta')->getClientOriginalName(),
+            'pathakta' => $pathakta,
+            'dokumen_tambahan' => $request->file('dokumen_tambahan')->getClientOriginalName(),
+            'pathdoc' => $pathdoc,
+            'jenis_passpor' => $request->jenis_passpor,
+            'kepentingan' => $request->kepentingan,
+            'negara_tujuan' => $request->negara_tujuan,
+            'keberangkatan' => $request->keberangkatan,
+            'kepulangan' => $request->kepulangan,
         ];
 
         $baseApi = new BaseApi;
@@ -40,17 +59,27 @@ class PermohonanController extends Controller
             return redirect()->back()->with(['errors' => $errors]);
         }
 
-        return redirect('/upload')->with('success','Pengajuan Permohonan Berhasil di upload!');
+        return redirect('/table-pengajuan')->with('success','Pengajuan Permohonan Berhasil di upload!');
 
         
     }
 
     public function upload(Request $request){
+
+        $pathkk = Storage::put("public/kk", $request->file('kk'));
+        $pathktp = Storage::put("public/ktp", $request->file('ktp'));
+        $pathakta = Storage::put("public/akta", $request->file('akta'));
+        $pathdoc = Storage::put("public/dokumen-tambahan", $request->file('dokumen_tambahan'));
+    
         $payload = [
-            'kk' => $request->kk,
-            'ktp' => $request->ktp,
-            'akta' => $request->akta,
-            'dokumen_tambahan' => $request->dokumen_tambahan,
+            'kk' => $request->file('kk')->getClientOriginalName(),
+            'pathkk' => $pathkk,
+            'ktp' => $request->file('ktp')->getClientOriginalName(),
+            'pathktp' => $pathktp,
+            'akta' => $request->file('akta')->getClientOriginalName(),
+            'pathakta' => $pathakta,
+            'dokumen_tambahan' => $request->file('dokumen_tambahan')->getClientOriginalName(),
+            'pathdoc' => $pathdoc,
             'jenis_passpor' => $request->jenis_passpor,
             'kepentingan' => $request->kepentingan,
             'negara_tujuan' => $request->negara_tujuan,
@@ -62,7 +91,7 @@ class PermohonanController extends Controller
 
         $baseApi = new BaseApi;
         $response = (new BaseApi)->uploadDokumen('/api/upload-doc',$payload);
-        dd($response);
+      
         if($response->failed()){
             $errors = $response->json('data');
             // dd($errors);
