@@ -33,11 +33,6 @@ class BaseApi{
         return $this->client()->post($endpoint,$data);
     }
 
-    public function indexLogin(String $endpoint, Array $data =[])
-    {
-        return $this->client()->get($endpoint,$data);
-    }
-
     public function login(String $endpoint,Array $data =[])
     {
         return $this->client()->post($endpoint,$data);
@@ -54,6 +49,15 @@ class BaseApi{
 
     public function uploadDokumen(String $endpoint, Array $data =[]){
         return $this->client()->post($endpoint,$data);
+    }
+
+    public function getData(String $endpoint , Array $data =[]){
+        return $this->client()->get($endpoint,$data);  
+    }
+
+    public function getDataDetail(String $endpoint, String $nik, Array $data = [])
+    {
+        return $this->client()->get("$endpoint/$nik", $data);
     }
 
 }

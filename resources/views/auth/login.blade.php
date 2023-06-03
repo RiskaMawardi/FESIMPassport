@@ -106,7 +106,7 @@
 
                                 <!-- Register buttons -->
                                 <div class="text-center">
-                                    <p>don't have account? <a href="/index-register" class="text-decoration-none">Register here</a></p>
+                                    <p>don't have account? <a href="/register-user" class="text-decoration-none">Register here</a></p>
                                     <!-- <button type="button" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-facebook-f"></i>
                                     </button>

@@ -27,8 +27,8 @@ Route::get('/logout',[AuthController::class,'logout']);
 
 
 //admin
-Route::get('/dashboard-admin',[AuthController::class,'dashAdmin']);
-Route::get('/pengajuan-index' , [AdminController::class,'pengajuan']);
+Route::get('/dashboard-admin' , [AdminController::class,'pengajuan']);
+Route::get('/detail-permohonan/{nik}',[AdminController::class,'indexPermohonan'])->name('detail');
 
 
 //user

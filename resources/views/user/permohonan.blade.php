@@ -1,5 +1,5 @@
 @extends('user.dashboard')
-@section('name', $user['name'])
+
 @section('content')
 <form class="forms-sample" action="{{route('uploadPermohonan')}}" method="POST" enctype="multipart/form-data">
     @csrf

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Libraries\BaseApi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PermohonanController extends Controller
@@ -13,7 +14,8 @@ class PermohonanController extends Controller
     }
 
     public function tablePermohonan(){
-        return view('user.table');
+        $user = Auth::user();
+        return view('user.table')->with('user',$user);
     }
 
     public function uploadDokumen(){

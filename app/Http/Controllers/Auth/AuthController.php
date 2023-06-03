@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Libraries\BaseApi;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class AuthController extends Controller
 {
@@ -40,7 +41,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function loginStore(Request $request){
+    public function loginStore1(Request $request){
 
         $request->validate([
             'email' => 'required',
@@ -48,36 +49,23 @@ class AuthController extends Controller
         ]);
 
         try{
-            $email = $request->email;
-            $password = $request->password;
-    
             $baseApi = new BaseApi;
-            //$response = $baseApi->login('/api/login');
-            // [
-            //     'headers' =>[
-            //         'Authorization' => 'Bearer'.session()->get('token.access_token'),
-            //         'Accept' => 'Application/json'
-            //     ],
-            //     'query' => [
-            //         'email' => $email,
-            //         'password' => $password
-            //     ]
-            // ]
             $response = $baseApi->login('/api/login', $request->all());
-            // $result = json_decode((string)$response->getBody(),true);
+           
             // dd($result);
             if($response->failed()){
                 $errors = $response->json('data');
                 dd($response);
                 return redirect()->back()->with(['errors' => $errors]);
             }
-
             $data = $response->json('data');
             
             return redirect()->route('dash-user')->with(['user' => $data['user']]);
         }catch(Exception $error){
-            return redirect()->back()->with(['errors' => $errors]);
+            return redirect()->back()->with(['errors' => $error]);
         }
+
+        
      
         
         
@@ -91,21 +79,19 @@ class AuthController extends Controller
       
     }
 
-    public function loginStore1(Request $request){
-        if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password])){
-            $user = Auth::user();
-            $success['token'] = $user->createToken('MyApp')->plainTextToken;
-            $success['data'] = $user;
-            return redirect('/dashboard-admin')->with('success',$success);
-        }else{
-            $user = Auth::user();
-            $success['token'] = $user->createToken('MyApp')->plainTextToken;
-            $success['data'] = $user;
-            return redirect('/dashboard-user')->with('success',$success);
-        }
 
-        return redirect()->back();
+    public function loginStore(Request $request){
+
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
+            $user = Auth::user(); 
+            $success['name'] =  $user->name;
+            return redirect('/table- ');
+            //return BaseController::sendResponse($success, 'User login successfully.');
+        } else{ 
+            //return BaseController::sendError('Unauthorised.', ['error'=>'Unauthorised']);
+        } 
     }
+
 
     public function logout(){
 
