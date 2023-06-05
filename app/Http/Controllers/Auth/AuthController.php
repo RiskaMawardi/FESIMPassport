@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Libraries\BaseApi;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
@@ -83,24 +84,25 @@ class AuthController extends Controller
     public function loginStore(Request $request){
 
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
-            $user = Auth::user(); 
-            $success['name'] =  $user->name;
-            return redirect('/table- ');
-            //return BaseController::sendResponse($success, 'User login successfully.');
-        } else{ 
+            if(Auth::user() && Auth::user()->role == true){
+                return redirect('/dashboard-admin');
+            }else{
+                return redirect('/table-pengajuan');
+            }
+           
+        }else{ 
+            return redirect()->back()->with('error','Login Gagal silahkan coba lagi!');
             //return BaseController::sendError('Unauthorised.', ['error'=>'Unauthorised']);
         } 
     }
 
 
     public function logout(){
-
-        $baseApi = new BaseApi;
-        $response = $baseApi->logout('/api/logout');
-
-        if($response->failed()){
-            return redirect()->back();
-        }
+        
+        $user = Auth::user()->id;
+        $user->auth('sanctum')->user()->tokens()->delete();
+      
+        return response()->noContent();
     }
 
     public function dashUser(){
