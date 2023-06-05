@@ -89,13 +89,13 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="form3Example1" name="name" class="form-control" />
+                                            <input type="text" id="form3Example1" name="name" class="form-control"  required/>
                                             <label class="form-label" for="form3Example1">Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="form3Example2" name="no_hp" class="form-control" />
+                                            <input type="text" id="form3Example2" name="no_hp" class="form-control" required />
                                             <label class="form-label" for="form3Example2">No Hp</label>
                                         </div>
                                     </div>
@@ -104,19 +104,30 @@
 
                              
                                         <div class="form-outline mb-4">
-                                            <input type="text" id="form3Example2" name="no_kk" class="form-control" />
+                                            <input type="text" id="form3Example2" name="no_kk" class="form-control" required />
                                             <label class="form-label" for="form3Example2">No kk</label>
                                         </div>
                                     
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="form3Example3" name="email" class="form-control" />
+                                    <input type="email" id="form3Example3" name="email" class="form-control @error('email') is-invalid @enderror" required />
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
                                     <label class="form-label" for="form3Example3">Email address</label>
                                 </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4" name="password" class="form-control" />
+                                    <input type="password" id="form3Example4" name="password" class="form-control @error('password') is-invalid @enderror"  required/>
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
                                 <input type="hidden" name="role" value="false">

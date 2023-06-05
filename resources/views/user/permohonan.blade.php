@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="hidden" name="nik" value={{}}>
+                            <input type="hidden" name="id_user" value="{{$user->id}}">
                             <label for="exampleInputUsername1">Nama Pemohon</label>
                             <input type="text" class="form-control" name="nama" id="exampleInputUsername1"
                                 placeholder="Nama Lengkap">

@@ -60,4 +60,9 @@ class BaseApi{
         return $this->client()->get("$endpoint/$nik", $data);
     }
 
+    public function getDt(String $endpoint, Array $data = [])
+    {
+        return $this->client()->get($endpoint, $data);
+    }
+
 }

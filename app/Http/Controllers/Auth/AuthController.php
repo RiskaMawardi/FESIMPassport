@@ -8,6 +8,7 @@ use App\Http\Libraries\BaseApi;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -17,6 +18,15 @@ class AuthController extends Controller
     }
 
     public function storeRegister(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'no_hp' => 'required|numeric',
+            'no_kk' => 'required|numeric',
+            'role' => 'required',
+        ]);
+
         $payload = [
             'name' => $request->name,
             'email' => $request->email,
@@ -31,7 +41,7 @@ class AuthController extends Controller
         
         if($response->failed()){
             $errors = $response->json('data');
-            // dd($errors);
+            //dd($errors);
             return redirect()->back()->with(['errors' => $errors]);
         }
 
@@ -99,10 +109,11 @@ class AuthController extends Controller
 
     public function logout(){
         
-        $user = Auth::user()->id;
-        $user->auth('sanctum')->user()->tokens()->delete();
+        
+        Session::flush();
+        Auth::logout();
+        return redirect('/login');
       
-        return response()->noContent();
     }
 
     public function dashUser(){

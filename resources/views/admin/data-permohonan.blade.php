@@ -18,20 +18,17 @@
                                                     <th>TGL PENGAJUAN</th>
 
                                                     <th>Action</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($datas as $data)
+                                                @foreach ($data as $dta)
                                                 <tr>
                                                 @php
-
-  
-                                                        
-
-                                        $kk = $data['pathkk'];
-                                        $ktp = $data['pathktp'];
-                                        $akta = $data['pathakta'];
-                                        $doc = $data['pathdoc'];
+                                        $kk = $dta->pathkk;
+                                        $ktp = $dta->pathktp;
+                                        $akta = $dta->pathakta;
+                                        $doc = $dta->pathdoc;
 
                                         $kk_path = list($public, $folder_student, $folder_kk, $file_kk) = explode("/", $kk);
                                         $ktp_path = list($public, $folder_student, $folder_ktp, $file_ktp) = explode("/", $ktp);
@@ -41,8 +38,8 @@
 
                                         @endphp
 
-                                                    <td>{{$data['nama']}}</td>
-                                                    <td>{{$data['nik']}}</td>
+                                                    <td>{{$dta->nama}}</td>
+                                                    <td>{{$dta->nik}}</td>
                                                     <td>
                                                         <a href="../../storage/{{$folder_student}}/{{$folder_kk}}/{{$file_kk}}" target="_blank" class="nav-link"><i class="fas fa-file-invoice"></i><span>&nbsp;KK</span></a>
                                                     </td>
@@ -54,7 +51,7 @@
                                                     </td>
                                                     <td>
                                                     @php
-                                                    if ($data['dokumen_tambahan'] == null) {
+                                                    if ($dta->dokumen_tambahan == null) {
                                                         echo "-";
                                                     }else {
                                                         
@@ -66,9 +63,24 @@
                                                     @endphp 
                                                     </td>
                     
-                                                    <td>{{$data['created_at']}}</td>
+                                                    <td>{{$dta->created_at}}</td>
                                                     <td>
-                                                        <a href="{{route('detail', $data['nik'])}}" class="btn btn-warning">Lihat Permohonan</a>
+                                                        <?php if($dta->status_permohonan =="pending" ){ ?>
+                                                        <a href="{{route('detail', $dta->nik)}}" class="btn btn-warning">Lihat Permohonan</a>
+                                                        <?php }elseif($dta->status_permohonan =="disetujui"){?>
+                                                            <a href="" class="btn btn-info">Cetak</a>
+                                                           <?php }else{ ?>
+                                                            <a href="{{route('detail', $dta->nik)}}" class="btn btn-warning">Lihat Permohonan</a>
+                                                           <?php }?>
+                                                    </td>
+                                                    <td>
+                                                    <?php if($dta->status_permohonan =="pending" ){ ?>
+                                                        <label class="badge badge-warning">Pending</label>
+                                                        <?php }elseif($dta->status_permohonan =="disetujui"){?>
+                                                            <label class="badge badge-success">Disetujui</label>
+                                                           <?php }else{ ?>
+                                                                 <label class="badge badge-danger">Ditolak</label>
+                                                           <?php }?>
                                                     </td>
                                                 </tr>
                                                 @endforeach
