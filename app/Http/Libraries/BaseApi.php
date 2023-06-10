@@ -23,10 +23,6 @@ class BaseApi{
         return $this->client()->get($endpoint,$data);
     }
 
-    public function indexRegister(String $endpoint, Array $data =[])
-    {
-        return $this->client()->get($endpoint,$data);
-    }
 
     public function registerUser(String $endpoint, Array $data =[])
     {
@@ -64,5 +60,10 @@ class BaseApi{
     {
         return $this->client()->get($endpoint, $data);
     }
+
+    public function insert(String $endpoint,Array $data =[]){
+        return $this->client()->post($endpoint,$data);
+    }
+
 
 }

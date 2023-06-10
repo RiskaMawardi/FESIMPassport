@@ -101,7 +101,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                                 aria-labelledby="profileDropdown">
-                                <a class="dropdown-item">
+                                <a href="/logout" class="dropdown-item">
                                     <i class="mdi mdi-logout text-primary"></i>
                                     Logout
                                 </a>
@@ -115,7 +115,8 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="row">
-                      @yield('content')
+            @yield('content')
+                    
                         <div class="row">
                             <div class="col-lg-12 grid-margin stretch-card">
 

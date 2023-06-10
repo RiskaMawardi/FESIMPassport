@@ -25,18 +25,16 @@
                                                 @foreach ($data as $dta)
                                                 <tr>
                                                 @php
-                                        $kk = $dta->pathkk;
-                                        $ktp = $dta->pathktp;
-                                        $akta = $dta->pathakta;
-                                        $doc = $dta->pathdoc;
+                                                    $kk = $dta->pathkk;
+                                                    $ktp = $dta->pathktp;
+                                                    $akta = $dta->pathakta;
+                                                    $doc = $dta->pathdoc;
 
-                                        $kk_path = list($public, $folder_student, $folder_kk, $file_kk) = explode("/", $kk);
-                                        $ktp_path = list($public, $folder_student, $folder_ktp, $file_ktp) = explode("/", $ktp);
-                                        $akta_path = list($public, $folder_student, $folder_akta, $file_akta) = explode("/", $akta);
-                                        $doc_path = list($public, $folder_student, $folder_doc, $file_doc) = explode("/", $doc);
-
-
-                                        @endphp
+                                                    $kk_path = list($public, $folder_student, $folder_kk, $file_kk) = explode("/", $kk);
+                                                    $ktp_path = list($public, $folder_student, $folder_ktp, $file_ktp) = explode("/", $ktp);
+                                                    $akta_path = list($public, $folder_student, $folder_akta, $file_akta) = explode("/", $akta);
+                                                    $doc_path = list($public, $folder_student, $folder_doc, $file_doc) = explode("/", $doc);
+                                                @endphp
 
                                                     <td>{{$dta->nama}}</td>
                                                     <td>{{$dta->nik}}</td>
@@ -68,7 +66,7 @@
                                                         <?php if($dta->status_permohonan =="pending" ){ ?>
                                                         <a href="{{route('detail', $dta->nik)}}" class="btn btn-warning">Lihat Permohonan</a>
                                                         <?php }elseif($dta->status_permohonan =="disetujui"){?>
-                                                            <a href="" class="btn btn-info">Cetak</a>
+                                                            <a href="/cetak/{{$dta->nik}}" class="btn btn-info">Upload Foto</a>
                                                            <?php }else{ ?>
                                                             <a href="{{route('detail', $dta->nik)}}" class="btn btn-warning">Lihat Permohonan</a>
                                                            <?php }?>

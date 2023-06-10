@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\AdminController;
+use Database\Seeders\AdminSeeder;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +33,9 @@ Route::get('/dashboard-admin' , [AdminController::class,'pengajuan'])->middlewar
 Route::get('/detail-permohonan/{nik}',[AdminController::class,'indexPermohonan'])->name('detail')->middleware('auth');
 Route::post('/approve',[AdminController::class,'approve'])->name('approve');
 Route::post('/disapprove',[AdminController::class,'disapprove'])->name('disapprove');
+Route::get('/cetak/{nik}',[AdminController::class,'cetak']);
+Route::post('/insert-foto',[AdminController::class,'insert']);
+Route::get('/cetak-paspor',[AdminController::class,'cetakPass']);
 
 //user
 Route::get('/pengajuan',[PermohonanController::class,'index'])->middleware('auth');

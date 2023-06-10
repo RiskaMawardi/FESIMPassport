@@ -23,7 +23,7 @@ class PermohonanController extends Controller
         $data = DB::table('kk')
        ->join('permohonan', 'permohonan.nik', '=', 'kk.nik')
        ->join('document', 'document.nik', '=', 'permohonan.nik')
-       ->select('kk.*','kk.nama','permohonan.jenis_passpor','permohonan.kepentingan','permohonan.negara_tujuan','permohonan.id_user','permohonan.keberangkatan','permohonan.kepulangan','permohonan.status_permohonan','document.kk','document.id_user','document.pathkk','document.ktp','document.pathktp','document.akta','document.pathakta','document.dokumen_tambahan','document.pathdoc')
+       ->select('kk.*','permohonan.jenis_passpor','permohonan.kepentingan','permohonan.negara_tujuan','permohonan.id_user','permohonan.keberangkatan','permohonan.kepulangan','permohonan.status_permohonan','document.kk','document.id_user','document.pathkk','document.ktp','document.pathktp','document.akta','document.pathakta','document.dokumen_tambahan','document.pathdoc')
        ->where('permohonan.id_user',$user->id)
        ->get();
        //dd($data);
@@ -69,7 +69,7 @@ class PermohonanController extends Controller
         $response = $baseApi->uploadPermohonan('/api/permohonan-upload',$payload);
         if($response->failed()){
             $errors = $response->json('data');
-            dd($errors);
+            // dd($errors);
             return redirect()->back()->with(['errors' => $errors]);
         }
 

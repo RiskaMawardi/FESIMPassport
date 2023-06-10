@@ -1,5 +1,4 @@
 @extends('user.dashboard')
-
 @section('content')
 <form class="forms-sample" action="{{route('uploadPermohonan')}}" method="POST" enctype="multipart/form-data">
     @csrf
@@ -33,11 +32,7 @@
                             <input type="date" class="form-control" name="tgl_lahir" id="exampleInputPassword1"
                                 placeholder="Password">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputConfirmPassword1">Tmp Lahir</label>
-                            <input type="text" class="form-control" name="tempat_lahir"
-                                id="exampleInputConfirmPassword1" placeholder="Password">
-                        </div>
+                       
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -67,6 +62,11 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                            <label for="exampleInputConfirmPassword1">Tmp Lahir</label>
+                            <input type="text" class="form-control" name="tempat_lahir"
+                                id="exampleInputConfirmPassword1" placeholder="Password">
+                        </div>
                 </div>
                 <div class="form-check form-check-flat form-check-primary">
                 <div class="btn btn-light" onclick="showHide()" id="show-hide-btn">Tampilkan Upload Dokumen</div>
